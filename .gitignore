@@ -1,0 +1,6 @@
+*.pyc
+.coverage
+.env
+.idea
+.vscode
+dist

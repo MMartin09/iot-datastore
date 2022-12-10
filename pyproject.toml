@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "iot-datastore"
+version = "0.1.0"
+description = ""
+authors = ["MMartin09 <mmartin09@outlook.at>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9, <3.12"
+fastapi = "^0.88.0"
+beanie = "^1.15.4"
+
+[tool.poetry.group.dev.dependencies]
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+ruff = "^0.0.171"
+black = "^22.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+ignore = [
+    "E501",  # line too long, handled by black
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
