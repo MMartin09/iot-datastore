@@ -1,11 +1,10 @@
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
+import src.core.settings.shared as shared_settings
 from src.core.settings.app import get_app_settings
 from src.db.helper import get_db_connection_string
 from src.models import db_models
-import src.core.settings.shared as shared_settings
-
 
 app_settings = get_app_settings()
 
@@ -18,7 +17,7 @@ async def init_db() -> None:
         user=app_settings.DB_USER,
         passwd=app_settings.DB_PASSWD,
         url=app_settings.DB_URL,
-        params="retryWrites=true&w=majority"
+        params="retryWrites=true&w=majority",
     )
 
     client = AsyncIOMotorClient(connection_string)

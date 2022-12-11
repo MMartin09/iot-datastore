@@ -13,8 +13,10 @@ beanie = "^1.15.4"
 
 [tool.poetry.group.dev.dependencies]
 uvicorn = {extras = ["standard"], version = "^0.20.0"}
-ruff = "^0.0.171"
+ruff = "^0.0.175"
 black = "^22.10.0"
+pre-commit = "^2.20.0"
+isort = "^5.10.1"
 
 [build-system]
 requires = ["poetry-core"]

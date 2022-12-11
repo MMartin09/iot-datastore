@@ -10,9 +10,7 @@ router = APIRouter()
 
 @router.post("/")
 async def create_measurement(
-    device_name: str,
-    measurement_in: models.MeasurementCreate
+    device_name: str, measurement_in: models.MeasurementCreate
 ) -> Any:
     measurement_create = models.Measurement(**measurement_in.dict())
     await models.Measurement.insert(measurement_create, link_rule=WriteRules.WRITE)
-

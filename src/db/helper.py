@@ -9,7 +9,7 @@ def get_db_connection_string(
     passwd: str,
     url: str,
     port: Optional[int] = None,
-    params: Optional[str] = None
+    params: Optional[str] = None,
 ) -> str:
     """Builds the connection string for MongDB.
 

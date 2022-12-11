@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List
 
 from beanie import Document, Link
 from pydantic import BaseModel
@@ -12,25 +12,13 @@ class DeviceBase(BaseModel):
 
 
 class DeviceCreate(DeviceBase):
-
     class Config:
-        schema_extra = {
-            "example": {
-                "name": "pico_one",
-                "type": "raspberry_pico_w"
-            }
-        }
+        schema_extra = {"example": {"name": "pico_one", "type": "raspberry_pico_w"}}
 
 
 class DeviceOut(DeviceBase):
-
     class Config:
-        schema_extra = {
-            "example": {
-                "name": "pico_one",
-                "type": "raspberry_pico_w"
-            }
-        }
+        schema_extra = {"example": {"name": "pico_one", "type": "raspberry_pico_w"}}
 
 
 class Device(Document, DeviceBase):

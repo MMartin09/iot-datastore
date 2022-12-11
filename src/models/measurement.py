@@ -1,21 +1,21 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 
-from beanie import Document, Granularity, TimeSeriesConfig, Link
-from pydantic import Field, BaseModel
+from beanie import Document, Granularity, TimeSeriesConfig
+from pydantic import BaseModel, Field
 
-
-#class SensorValueBase(BaseModel):
+# class SensorValueBase(BaseModel):
 #    sensor: str
 #    value: str
 #
 #
-#class SensorValueCreate(SensorValueBase):
+# class SensorValueCreate(SensorValueBase):
 #    ...
 #
 #
-#class SensorValue(Document, SensorValueBase):
+# class SensorValue(Document, SensorValueBase):
 #    ...
+
 
 class SensorValue(BaseModel):
     sensor: str
