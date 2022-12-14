@@ -14,8 +14,6 @@ router = APIRouter()
     "/", summary="Get all sensors of a device.", response_model=List[models.DeviceOut]
 )
 async def get_sensors(device_name: str) -> Any:
-    await init_db()
-
     device = await models.Device.find_one(
         models.Device.name == device_name, fetch_links=True
     )

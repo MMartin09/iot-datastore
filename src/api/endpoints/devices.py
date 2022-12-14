@@ -11,16 +11,12 @@ router = APIRouter()
 
 @router.get("/", response_model=list[models.DeviceOut])
 async def get_devices() -> Any:
-    await init_db()
-
     devices = await crud_device.get_all()
     return devices
 
 
 @router.post("/")
 async def create_device(device_in: models.DeviceCreate) -> Any:
-    await init_db()
-
     device = await crud_device.get_by_name(name=device_in.name)
     if device is not None:
         raise HTTPException(
