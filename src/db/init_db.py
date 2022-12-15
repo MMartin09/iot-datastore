@@ -3,7 +3,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from src.core.settings.app import get_app_settings
 from src.db.helper import get_db_connection_string
-from src.models import db_models, Measurement, Sensor, Device
+from src.models import db_models
 
 app_settings = get_app_settings()
 

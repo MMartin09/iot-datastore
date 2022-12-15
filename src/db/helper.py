@@ -8,7 +8,6 @@ def get_db_connection_string(
     user: str,
     passwd: str,
     url: str,
-    port: Optional[int] = None,
     params: Optional[str] = None,
 ) -> str:
     """Builds the connection string for MongDB.
@@ -25,12 +24,9 @@ def get_db_connection_string(
 
     """
 
-    conn = "mongodb+srv://"
+    conn = "mongodb://"
     conn += f"{user}:{passwd}"
     conn += f"@{url}"
-
-    if port is not None:
-        conn += f":{port}"
 
     if params is not None:
         conn += f"/?{params}"

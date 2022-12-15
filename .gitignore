@@ -2,5 +2,7 @@
 .coverage
 .env
 .idea
+.pytest_cache
 .vscode
 dist
+htmlcov

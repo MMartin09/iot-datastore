@@ -5,7 +5,6 @@ from fastapi import APIRouter, HTTPException, status
 
 from src import models
 from src.crud import crud_device
-from src.db.init_db import init_db
 
 router = APIRouter()
 
@@ -25,8 +24,6 @@ async def get_sensors(device_name: str) -> Any:
     "/", status_code=status.HTTP_201_CREATED, summary="Add a new sensor to a device."
 )
 async def create_sensor(device_name: str, sensor_in: models.SensorCreate) -> Any:
-    await init_db()
-
     device = await crud_device.get_by_name(name=device_name)
 
     if not device:

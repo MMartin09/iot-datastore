@@ -4,7 +4,6 @@ from fastapi import APIRouter, HTTPException, status
 
 from src import models
 from src.crud import crud_device
-from src.db.init_db import init_db
 
 router = APIRouter()
 
@@ -15,7 +14,7 @@ async def get_devices() -> Any:
     return devices
 
 
-@router.post("/")
+@router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_device(device_in: models.DeviceCreate) -> Any:
     device = await crud_device.get_by_name(name=device_in.name)
     if device is not None:
