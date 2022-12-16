@@ -17,6 +17,11 @@ async def get_sensors(device_name: str) -> Any:
         models.Device.name == device_name, fetch_links=True
     )
 
+    if not device:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Device not found"
+        )
+
     return device.sensors
 
 
@@ -41,12 +46,25 @@ async def create_sensor(device_name: str, sensor_in: models.SensorCreate) -> Any
 
 
 @router.put("/{sensor_name}")
-def update_sensor_by_name(sensor_name: str) -> Any:
+async def update_sensor_by_name(device_name: str, sensor_name: str) -> Any:
     # TODO Implement
     ...
 
 
 @router.delete("/{sensor_name}")
-def delete_sensor_by_name(sensor_name: str) -> Any:
-    # TODO Implement
-    ...
+async def delete_sensor_by_name(device_name: str, sensor_name: str) -> Any:
+    device = await models.Device.find_one(
+        models.Device.name == device_name,
+        models.Device.sensors.name == sensor_name,
+        fetch_links=True,
+    )
+
+    if not device:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Device not found"
+        )
+
+    print(device.sensors)
+
+    x = device.sensors.to_dict()
+    print(x)

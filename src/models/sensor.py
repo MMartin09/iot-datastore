@@ -8,11 +8,13 @@ class SensorBase(BaseModel):
 
 
 class SensorCreate(SensorBase):
-    ...
+    class Config:
+        schema_extra = {"example": {"name": "sps30", "type": "sensirion_sps30"}}
 
 
 class SensorOut(SensorBase):
-    ...
+    class Config:
+        schema_extra = {"example": {"name": "sps30", "type": "sensirion_sps30"}}
 
 
 class Sensor(Document, SensorBase):

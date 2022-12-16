@@ -1,5 +1,6 @@
 from typing import Any
 
+from beanie import DeleteRules
 from fastapi import APIRouter, HTTPException, Response, status
 
 from src import models
@@ -65,4 +66,6 @@ async def delete_device_by_name(device_name: str) -> Any:
             status_code=status.HTTP_404_NOT_FOUND, detail="Device not found"
         )
 
-    await device.delete()
+    # Delete Links -> Also delete the sensors of the device
+    # TODO: Check if measurements are also delete?!
+    await device.delete(link_rule=DeleteRules.DELETE_LINKS)
