@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Response, status
 
 from src import models
 from src.crud import crud_device
@@ -36,3 +36,33 @@ async def get_device_by_name(device_name: str) -> Any:
         )
 
     return device
+
+
+@router.put("/{device_name}")
+async def update_device_by_name(
+    device_name: str, device_in: models.DeviceCreate, response: Response
+) -> Any:
+    device = await crud_device.get_by_name(name=device_name)
+
+    if device is None:
+        device_create = models.Device(**device_in.dict())
+        await models.Device.insert_one(device_create)
+
+        response.status_code = status.HTTP_201_CREATED
+
+    update_data = device_in.dict(exclude_unset=True)
+    device = device.copy(update=update_data)
+
+    await device.replace()
+
+
+@router.delete("/{device_name}")
+async def delete_device_by_name(device_name: str) -> Any:
+    device = await crud_device.get_by_name(name=device_name)
+
+    if not device:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Device not found"
+        )
+
+    await device.delete()

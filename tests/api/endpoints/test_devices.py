@@ -64,6 +64,20 @@ async def test_create_device_already_exist(
 
 
 @pytest.mark.asyncio
+async def teste_delete_device_by_name(
+    default_client: httpx.AsyncClient, mock_device: mock_device
+) -> None:
+    headers = {
+        "Content-Type": "application/json",
+    }
+
+    url = f"/api/devices/{mock_device.name}"
+    response = await default_client.delete(url, headers=headers)
+
+    assert response.status_code == 200
+
+
+@pytest.mark.asyncio
 async def test_get_device_by_name_not_found(
     default_client: httpx.AsyncClient, mock_device: models.Device
 ) -> None:

@@ -38,3 +38,15 @@ async def create_sensor(device_name: str, sensor_in: models.SensorCreate) -> Any
     # Add the sensor to the list of sensors for the device and replace the device data
     device.sensors.append(sensor_create)
     await models.Device.replace(device, link_rule=WriteRules.WRITE)
+
+
+@router.put("/{sensor_name}")
+def update_sensor_by_name(sensor_name: str) -> Any:
+    # TODO Implement
+    ...
+
+
+@router.delete("/{sensor_name}")
+def delete_sensor_by_name(sensor_name: str) -> Any:
+    # TODO Implement
+    ...

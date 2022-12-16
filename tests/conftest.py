@@ -1,7 +1,6 @@
 import asyncio
 
 import httpx
-import pytest
 import pytest_asyncio
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -33,4 +32,3 @@ async def default_client():
 
         await models.Sensor.find_all().delete()
         await models.Device.find_all().delete()
-
