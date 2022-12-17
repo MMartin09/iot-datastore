@@ -55,7 +55,6 @@ async def update_sensor_by_name(device_name: str, sensor_name: str) -> Any:
 async def delete_sensor_by_name(device_name: str, sensor_name: str) -> Any:
     device = await models.Device.find_one(
         models.Device.name == device_name,
-        models.Device.sensors.name == sensor_name,
         fetch_links=True,
     )
 
@@ -64,7 +63,14 @@ async def delete_sensor_by_name(device_name: str, sensor_name: str) -> Any:
             status_code=status.HTTP_404_NOT_FOUND, detail="Device not found"
         )
 
-    print(device.sensors)
+    idx: int = -1
+    for i, sensor in enumerate(device.sensors):
+        if sensor.name == sensor_name:
+            idx = i
 
-    x = device.sensors.to_dict()
-    print(x)
+    if idx == -1:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Sensor not found"
+        )
+
+    await device.sensors[idx].delete()
