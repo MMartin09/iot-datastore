@@ -5,6 +5,10 @@
 
 > Be aware that MongDB 5.0 or higher is required to support timeseries.
 
+## Requirements
+
+- **MongoDB Atlas:** https://www.mongodb.com/atlas
+
 ## Contributing
 
 Install the *pre-commit* hooks `pre-commit install`
