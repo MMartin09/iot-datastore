@@ -1,9 +1,9 @@
-x*.pyc
+*.pyc
 .coverage
 .env
 .idea
 .pytest_cache
 .vscode
-dist            # Python package build artifacts
-htmlcov         # PyTest coverage report
-site            # MkDocs build
+dist
+htmlcov
+site
