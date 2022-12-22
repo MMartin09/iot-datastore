@@ -52,6 +52,9 @@ async def create_measurement(
         )
 
     measurement_create = models.Measurement(
-        **measurement_in.dict(), sensor=device.sensors[idx]
+        **measurement_in.dict(),
     )
+    measurement_create.meta["sensorId"] = device.sensors[idx].id
+    measurement_create.meta["type"] = device.sensors[idx].type
+
     await models.Measurement.insert(measurement_create, link_rule=WriteRules.WRITE)

@@ -6,3 +6,17 @@ theme:
   name: material
   icon:
     repo: fontawesome/brands/github
+
+nav:
+  - IoT-Datastore: index.md
+  - Architecture: architecture.md
+  - API Usage: api_usage.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

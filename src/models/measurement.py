@@ -1,10 +1,8 @@
 from datetime import datetime
-from typing import List, Union
+from typing import Dict, List, Union
 
-from beanie import Document, Granularity, Link, TimeSeriesConfig
+from beanie import Document, Granularity, TimeSeriesConfig
 from pydantic import BaseModel, Field
-
-from src.models.sensor import Sensor
 
 
 class SensorValue(BaseModel):
@@ -22,9 +20,8 @@ class MeasurementCreate(MeasurementBase):
 
 class Measurement(Document, MeasurementBase):
     ts: datetime = Field(default_factory=datetime.now)
-    meta: str = "iot-sensor"
+    meta: Dict[str, str] = {}
 
-    sensor: Link[Sensor]
     sensor_values: List[SensorValue] = []
 
     class Settings:
