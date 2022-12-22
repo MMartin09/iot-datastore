@@ -9,21 +9,21 @@ packages = [{include = "src"}]
 [tool.poetry.dependencies]
 python = ">=3.9, <3.12"
 fastapi = "^0.88.0"
-beanie = "^1.15.4"
+beanie = "^1.16.4"
 
 [tool.poetry.group.dev.dependencies]
 uvicorn = {extras = ["standard"], version = "^0.20.0"}
-ruff = "^0.0.175"
-black = "^22.10.0"
+ruff = "^0.0.191"
+black = "^22.12.0"
 pre-commit = "^2.20.0"
-isort = "^5.10.1"
+isort = "^5.11.4"
 
 
 [tool.poetry.group.testing.dependencies]
 httpx = "^0.23.1"
 pytest = "^7.2.0"
 pytest-asyncio = "^0.20.3"
-coverage = "^6.5.0"
+coverage = "^7.0.0"
 
 
 [tool.poetry.group.docs.dependencies]
