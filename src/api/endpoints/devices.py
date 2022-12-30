@@ -3,7 +3,7 @@ from typing import Any
 from beanie import DeleteRules
 from fastapi import APIRouter, HTTPException, Response, status
 
-from src import models
+from src import crud, models
 from src.crud import crud_device
 
 router = APIRouter()
@@ -17,7 +17,7 @@ async def get_devices() -> Any:
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_device(device_in: models.DeviceCreate) -> Any:
-    device = await crud_device.get_by_name(name=device_in.name)
+    device = await crud.device.get_by_name(name=device_in.name)
     if device is not None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT, detail="Device already exist"
@@ -29,7 +29,7 @@ async def create_device(device_in: models.DeviceCreate) -> Any:
 
 @router.get("/{device_name}", response_model=models.DeviceOut)
 async def get_device_by_name(device_name: str) -> Any:
-    device = await crud_device.get_by_name(name=device_name)
+    device = await crud.device.get_by_name(name=device_name)
 
     if not device:
         raise HTTPException(
@@ -43,7 +43,7 @@ async def get_device_by_name(device_name: str) -> Any:
 async def update_device_by_name(
     device_name: str, device_in: models.DeviceCreate, response: Response
 ) -> Any:
-    device = await crud_device.get_by_name(name=device_name)
+    device = await crud.device.get_by_name(name=device_name)
 
     if device is None:
         device_create = models.Device(**device_in.dict())
@@ -59,7 +59,7 @@ async def update_device_by_name(
 
 @router.delete("/{device_name}")
 async def delete_device_by_name(device_name: str) -> Any:
-    device = await crud_device.get_by_name(name=device_name)
+    device = await crud.device.get_by_name(name=device_name)
 
     if not device:
         raise HTTPException(
